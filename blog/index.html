@@ -1,8 +1,13 @@
----
-layout: layouts/blog-base.njk
-title: Recent Posts
----
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recent Posts</title>
+  <link rel="stylesheet" href="/Blog/static/css/blog-style.css">
+</head>
+<body>
+  
 <div class="blog-container">
   <header class="blog-header">
     <button class="hamburger-menu" id="hamburgerMenu">
@@ -23,16 +28,16 @@ title: Recent Posts
   </header>
 
   <div class="posts-grid">
-    {% for post in collections.post | reverse %}
+    
     <article class="post-card">
-      <a href="{{ post.url }}">
+      <a href="/posts/sample1/">
         <div class="post-image">
-          <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}">
+          <img src="../static/images/homepage.png" alt="Weekend Adventures in the City">
         </div>
-        <h2 class="post-title">{{ post.data.title }}</h2>
+        <h2 class="post-title">Weekend Adventures in the City</h2>
       </a>
     </article>
-    {% endfor %}
+    
   </div>
 </div>
 
@@ -53,3 +58,5 @@ title: Recent Posts
     }
   });
 </script>
+</body>
+</html>
