@@ -1,0 +1,55 @@
+---
+layout: layouts/blog-base.njk
+title: Recent Posts
+---
+
+<div class="blog-container">
+  <header class="blog-header">
+    <button class="hamburger-menu" id="hamburgerMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <h1 class="page-title">recent posts</h1>
+    
+    <nav class="dropdown-menu" id="dropdownMenu">
+      <ul>
+        <li><a href="#">Menu Item 1</a></li>
+        <li><a href="#">Menu Item 2</a></li>
+        <li><a href="#">Menu Item 3</a></li>
+        <li><a href="#">Menu Item 4</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="posts-grid">
+    {% for post in collections.post | reverse %}
+    <article class="post-card">
+      <a href="{{ post.url }}">
+        <div class="post-image">
+          <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}">
+        </div>
+        <h2 class="post-title">{{ post.data.title }}</h2>
+      </a>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const dropdown = document.getElementById('dropdownMenu');
+  
+  hamburger.addEventListener('click', () => {
+    dropdown.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  });
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+  });
+</script>

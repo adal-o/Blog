@@ -1,0 +1,22 @@
+---
+layout: layouts/blog-base.njk
+---
+
+<article class="post-container">
+  <header class="post-header">
+    <a href="/blog" class="back-button">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <h1 class="post-heading">{{ title }}</h1>
+  </header>
+
+  <div class="post-meta">
+    <p class="post-author">by {{ author }}</p>
+  </div>
+
+  <div class="post-content">
+    {{ content | safe }}
+  </div>
+</article>

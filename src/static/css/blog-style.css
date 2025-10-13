@@ -1,0 +1,255 @@
+/* General Styles */
+:root {
+  --pink: #E8B4D9;
+  --pink-light: #F5D9ED;
+  --text-dark: #333;
+  --bg-white: #FEFEFE;
+  --font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: --font-family;
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Blog Selection Page */
+.blog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+.blog-header {
+  position: relative;
+  margin-bottom: 80px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.hamburger-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 100;
+}
+
+.hamburger-menu span {
+  width: 30px;
+  height: 3px;
+  background-color: var(--pink);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--pink);
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: white;
+  border: 1px solid var(--pink-light);
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(232, 180, 217, 0.2);
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu ul {
+  list-style: none;
+}
+
+.dropdown-menu li {
+  margin-bottom: 12px;
+}
+
+.dropdown-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.dropdown-menu a {
+  color: var(--pink);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  color: var(--text-dark);
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 60px;
+  margin-top: 40px;
+}
+
+.post-card {
+  text-align: center;
+}
+
+.post-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  background-color: var(--pink-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-title {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--pink);
+  font-style: italic;
+  margin-top: 15px;
+}
+
+/* Individual Post Page */
+.post-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.back-button {
+  color: var(--pink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+  transform: translateX(-5px);
+}
+
+.post-heading {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--pink);
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.post-meta {
+  margin-bottom: 60px;
+  padding-left: 70px;
+}
+
+.post-author {
+  font-size: 0.95rem;
+  color: var(--pink);
+}
+
+.post-content {
+  padding-left: 70px;
+}
+
+.post-content p {
+  margin-bottom: 30px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--pink);
+}
+
+.post-content img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 40px 0;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .blog-container,
+  .post-container {
+    padding: 40px 20px;
+  }
+
+  .page-title,
+  .post-heading {
+    font-size: 2rem;
+  }
+
+  .posts-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .post-meta,
+  .post-content {
+    padding-left: 0;
+  }
+
+  .post-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

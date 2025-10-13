@@ -1,0 +1,28 @@
+:root {
+    --primary-color: #333;
+    --secondary-color: #666;
+    --accent-color: #007bff;
+    --background-color: #f8f9fa;
+    --text-bg: rgba(255, 255, 255, 0.95);
+    --font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body-home {
+    font-family: var(--font-family);
+    overflow: hidden;
+    background-image: url('../images/homepage.png');
+}
+
+.main-content {
+    /* background-color: white; */
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}

@@ -1,0 +1,79 @@
+.overlay-text {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 0 150px;
+    display: flex;
+    z-index: 1000;
+    justify-content: right;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 75px;
+}
+
+.overlay-text .nav-item {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 400;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.overlay-text .nav-item:visited,
+.overlay-text .nav-item:link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.overlay-text .nav-item:hover {
+    text-decoration: underline;
+    color: rgb(210, 34, 34);
+}
+
+.name-logo {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.name-logo:hover {
+    transform: scale(1.1);
+}
+
+
+@media (max-width: 768px) {
+    .overlay-text {
+        flex-direction: column;
+        gap: 15px;
+        top: 10px;
+        font-size: 18px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+    }
+    
+    .overlay-text .nav-item {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .overlay-text {
+        gap: 10px;
+        font-size: 16px;
+    }
+    
+    .overlay-text .nav-item {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+}

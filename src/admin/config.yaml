@@ -1,0 +1,66 @@
+# Decap CMS Configuration
+backend:
+  name: git-gateway
+  branch: main
+
+# For local testing
+local_backend: true
+
+# Where uploaded images go
+media_folder: "src/images/uploads"
+public_folder: "/images/uploads"
+
+# Blog post collection
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "src/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      
+      - label: "Author"
+        name: "author"
+        widget: "select"
+        options: 
+          - "Friend A"
+          - "Friend B"
+      
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+      
+      - label: "Layout"
+        name: "layout"
+        widget: "hidden"
+        default: "post.njk"
+      
+      - label: "Content Blocks"
+        name: "blocks"
+        widget: "list"
+        types:
+          - label: "Paragraph"
+            name: "paragraph"
+            widget: "object"
+            summary: "{{fields.content}}"
+            fields:
+              - label: "Content"
+                name: "content"
+                widget: "text"
+          
+          - label: "Image"
+            name: "image"
+            widget: "object"
+            summary: "Image: {{fields.alt}}"
+            fields:
+              - label: "Image"
+                name: "src"
+                widget: "image"
+              - label: "Alt Text"
+                name: "alt"
+                widget: "string"
