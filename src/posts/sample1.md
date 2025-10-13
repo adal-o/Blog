@@ -1,6 +1,6 @@
 ---
 title: "Weekend Adventures in the City"
-author: "Alex"
+author: "Amelie"
 date: 2025-10-10
 featuredImage: "../static/images/homepage.png"
 layout: "layouts/post.njk"
