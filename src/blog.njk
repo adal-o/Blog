@@ -45,7 +45,6 @@ title: Recent Posts
     hamburger.classList.toggle('active');
   });
   
-  // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
     if (!hamburger.contains(e.target) && !dropdown.contains(e.target)) {
       dropdown.classList.remove('active');
