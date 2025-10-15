@@ -1,16 +1,13 @@
 module.exports = function(eleventyConfig) {
   // Copy static assets to maintain your existing structure
   eleventyConfig.addPassthroughCopy("src/static");
-  
-  // Copy admin folder for CMS
-  eleventyConfig.addPassthroughCopy("src/admin");
-  
-  // Copy images/uploads folder for blog images
-  eleventyConfig.addPassthroughCopy("src/images");
-  
   // Create a collection for blog posts
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/posts/*.md");
+  });
+
+  eleventyConfig.addFilter("removeLeadingSlash", function(url) {
+    return url.startsWith("/") ? url.slice(1) : url;
   });
   
   // Set input/output directories

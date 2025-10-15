@@ -25,7 +25,7 @@ title: Recent Posts
   <div class="posts-grid">
     {% for post in collections.post | reverse %}
     <article class="post-card">
-      <a href="{{ site.baseUrl }}{{ post.url }}">
+      <a href="{{ site.baseUrl }}{{ post.url | removeLeadingSlash }}">
         <div class="post-image">
           <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}">
         </div>
