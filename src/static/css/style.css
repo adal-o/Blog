@@ -222,7 +222,7 @@
 @media (max-width: 768px) {
     .posts-grid {
         grid-template-columns: repeat(2, 1fr);
-        margin-top: 20%;
+        margin-top: 8rem;
     }
 }
 
@@ -230,7 +230,7 @@
 @media (max-width: 480px) {
     .posts-grid {
         grid-template-columns: 1fr;
-        margin-top: 40%;
+        margin-top: 8rem;
     }
 }
 
