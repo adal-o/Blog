@@ -3,13 +3,47 @@ document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("subscribe-open");
   const closeBtn = document.getElementById("subscribe-close");
 
-  openBtn?.addEventListener("click", () => overlay.classList.add("active"));
+  const form = document.getElementById("mc-embedded-subscribe-form");
+  const msgEl = document.getElementById("subscribe-msg");
+
+  openBtn?.addEventListener("click", () => {
+    overlay.classList.add("active");
+    if (msgEl) msgEl.textContent = "";
+  });
   closeBtn?.addEventListener("click", () => overlay.classList.remove("active"));
   overlay?.addEventListener("click", e => {
     if (e.target === overlay) overlay.classList.remove("active");
   });
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") overlay?.classList.remove("active");
+  });
+
+  form?.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const email = document.getElementById("mce-EMAIL").value;
+    const callbackName = "_mc_cb_" + Date.now();
+    const url = form.action
+      + "&EMAIL=" + encodeURIComponent(email)
+      + "&b_186537096480d22ea1f8ec6d6_6c0325d046="
+      + "&c=" + callbackName;
+
+    window[callbackName] = function(data) {
+      delete window[callbackName];
+      document.head.removeChild(script);
+      if (data.result === "success") {
+        form.querySelector("input[type=email]").value = "";
+        msgEl.textContent = "subscribed!";
+        msgEl.className = "subscribe-msg success";
+      } else {
+        const alreadySubbed = data.msg && data.msg.toLowerCase().includes("already subscribed");
+        msgEl.textContent = alreadySubbed ? "already subscribed!" : "something went wrong, try again.";
+        msgEl.className = "subscribe-msg error";
+      }
+    };
+
+    const script = document.createElement("script");
+    script.src = url;
+    document.head.appendChild(script);
   });
 
   const postContent = document.querySelector(".post-content");

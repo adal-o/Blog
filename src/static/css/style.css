@@ -418,6 +418,21 @@ p.about-credit {
     background: var(--secondary-color);
 }
 
+.subscribe-msg {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    min-height: 1.2em;
+}
+
+.subscribe-msg.success {
+    color: var(--accent-color);
+}
+
+.subscribe-msg.error {
+    color: var(--primary-color);
+}
+
 @media (max-width: 480px) {
     .subscribe-modal {
         padding: 2rem 1.25rem 1.5rem;
