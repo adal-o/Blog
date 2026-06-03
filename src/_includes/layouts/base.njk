@@ -19,7 +19,7 @@
                 <a href="{{ site.baseUrl }}about/" class="nav-item">about</a>
                 <a href="{{ site.baseUrl }}blogs/" class="nav-item">read</a>
                 <a href="{{ site.baseUrl }}contact/" class="nav-item">contact</a>
-                <a href="{{ site.baseUrl }}contact/" class="nav-item">subscribe</a>
+                <button class="nav-item subscribe-nav-btn" id="subscribe-open">subscribe</button>
             </div>
         </div>
         {% endif %}
@@ -32,6 +32,20 @@
         {{ content | safe }}
     </main>
 
+
+    <div class="subscribe-overlay" id="subscribe-overlay" role="dialog" aria-modal="true" aria-label="Subscribe">
+        <div class="subscribe-modal">
+            <button class="subscribe-close" id="subscribe-close" aria-label="Close">&times;</button>
+            <p class="subscribe-heading">stay in the loop</p>
+            <form action="https://github.us19.list-manage.com/subscribe/post?u=186537096480d22ea1f8ec6d6&amp;id=6c0325d046&amp;f_id=00ebc3e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
+                <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="your email" required>
+                <div aria-hidden="true" style="position:absolute;left:-5000px">
+                    <input type="text" name="b_186537096480d22ea1f8ec6d6_6c0325d046" tabindex="-1" value="">
+                </div>
+                <button type="submit" name="subscribe">subscribe</button>
+            </form>
+        </div>
+    </div>
 
     {% if not inlineScript %}
     <script src="{{ site.baseUrl }}static/js/{{ jsFile or 'script.js' }}"></script>

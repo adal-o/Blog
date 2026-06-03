@@ -1,4 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("subscribe-overlay");
+  const openBtn = document.getElementById("subscribe-open");
+  const closeBtn = document.getElementById("subscribe-close");
+
+  openBtn?.addEventListener("click", () => overlay.classList.add("active"));
+  closeBtn?.addEventListener("click", () => overlay.classList.remove("active"));
+  overlay?.addEventListener("click", e => {
+    if (e.target === overlay) overlay.classList.remove("active");
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") overlay?.classList.remove("active");
+  });
+
   const postContent = document.querySelector(".post-content");
   if (postContent) {
     const textCol = document.createElement("div");
@@ -19,39 +32,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const draggables = document.querySelectorAll(".draggable");
-  let highestZIndex = 1; // Global z-index counter
+  let highestZIndex = 1;
 
   draggables.forEach(img => {
-    // Prevent default drag behavior
     img.draggable = false;
-    
-    // randomize start position
+
     img.style.top = Math.random() * 70 + 10 + "%";
     img.style.left = Math.random() * 70 + 10 + "%";
 
     let isDragging = false, offsetX, offsetY;
 
     img.addEventListener("mousedown", e => {
-      e.preventDefault(); // Prevent default behavior
+      e.preventDefault();
       isDragging = true;
       offsetX = e.clientX - img.offsetLeft;
       offsetY = e.clientY - img.offsetTop;
-      
-      // Increment and assign the highest z-index
       highestZIndex++;
       img.style.zIndex = highestZIndex;
-      
       img.style.cursor = "grabbing";
     });
 
-    // Prevent context menu on right-click during drag
     img.addEventListener("contextmenu", e => {
       if (isDragging) {
         e.preventDefault();
       }
     });
 
-    // Prevent drag start event
     img.addEventListener("dragstart", e => {
       e.preventDefault();
       return false;
@@ -71,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Handle mouse leaving window while dragging
     window.addEventListener("mouseleave", () => {
       if (isDragging) {
         isDragging = false;
@@ -79,15 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Touch support
     img.addEventListener("touchstart", e => {
       e.preventDefault();
       const touch = e.touches[0];
       isDragging = true;
       offsetX = touch.clientX - img.offsetLeft;
       offsetY = touch.clientY - img.offsetTop;
-      
-      // Increment and assign the highest z-index
       highestZIndex++;
       img.style.zIndex = highestZIndex;
     });
@@ -107,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    window.addEventListener("touchcancel", e => {
+    window.addEventListener("touchcancel", () => {
       if (isDragging) {
         isDragging = false;
       }

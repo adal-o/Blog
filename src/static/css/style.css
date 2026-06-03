@@ -312,3 +312,115 @@ p.about-credit {
         margin-top: 8rem;
     }
 }
+
+/* Subscribe modal */
+.subscribe-nav-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-family);
+    font-size: inherit;
+    font-weight: bold;
+    color: inherit;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.subscribe-nav-btn:hover {
+    font-style: italic;
+}
+
+.subscribe-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(86, 56, 56, 0.4);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.subscribe-overlay.active {
+    display: flex;
+}
+
+.subscribe-modal {
+    background: var(--background-color);
+    padding: 2.5rem 2rem 2rem;
+    width: 100%;
+    max-width: 340px;
+    position: relative;
+    text-align: center;
+}
+
+.subscribe-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+}
+
+.subscribe-close:hover {
+    color: var(--primary-color);
+}
+
+.subscribe-heading {
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.25rem;
+}
+
+.subscribe-modal input[type="email"] {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 0;
+    background: transparent;
+    font-family: var(--font-family);
+    font-size: 0.875rem;
+    color: var(--secondary-color);
+    outline: none;
+    margin-bottom: 0.75rem;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.subscribe-modal input[type="email"]::placeholder {
+    color: #bba8a8;
+}
+
+.subscribe-modal input[type="email"]:focus {
+    border-color: var(--secondary-color);
+}
+
+.subscribe-modal button[type="submit"] {
+    width: 100%;
+    padding: 0.65rem;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    font-family: var(--font-family);
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.subscribe-modal button[type="submit"]:hover {
+    background: var(--secondary-color);
+}
+
+@media (max-width: 480px) {
+    .subscribe-modal {
+        padding: 2rem 1.25rem 1.5rem;
+        max-width: 100%;
+    }
+}
