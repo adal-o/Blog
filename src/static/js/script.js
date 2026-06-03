@@ -21,9 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
   form?.addEventListener("submit", function(e) {
     e.preventDefault();
     const email = document.getElementById("mce-EMAIL").value;
+    const fname = document.getElementById("mce-FNAME").value;
+    const lname = document.getElementById("mce-LNAME").value;
     const callbackName = "_mc_cb_" + Date.now();
     const url = form.action
       + "&EMAIL=" + encodeURIComponent(email)
+      + "&FNAME=" + encodeURIComponent(fname)
+      + "&LNAME=" + encodeURIComponent(lname)
       + "&b_186537096480d22ea1f8ec6d6_6c0325d046="
       + "&c=" + callbackName;
 
@@ -31,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       delete window[callbackName];
       document.head.removeChild(script);
       if (data.result === "success") {
-        form.querySelector("input[type=email]").value = "";
+        form.querySelectorAll("input[type=email], input[type=text]:not([tabindex='-1'])").forEach(el => el.value = "");
         msgEl.textContent = "subscribed!";
         msgEl.className = "subscribe-msg success";
       } else {
@@ -41,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
+    console.log("Mailchimp URL:", url);
     const script = document.createElement("script");
     script.src = url;
     document.head.appendChild(script);

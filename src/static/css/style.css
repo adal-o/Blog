@@ -378,6 +378,32 @@ p.about-credit {
     margin-bottom: 1.25rem;
 }
 
+.subscribe-name-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.subscribe-name-row input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--primary-color);
+    background: transparent;
+    font-family: var(--font-family);
+    font-size: 0.875rem;
+    color: var(--secondary-color);
+    outline: none;
+}
+
+.subscribe-name-row input::placeholder {
+    color: #bba8a8;
+}
+
+.subscribe-name-row input:focus {
+    border-color: var(--secondary-color);
+}
+
 .subscribe-modal input[type="email"] {
     width: 100%;
     padding: 0.65rem 0.75rem;
