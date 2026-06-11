@@ -104,7 +104,7 @@
 
   async function buildPostCard(file) {
     let title = file.name.replace(/\.md$/, '');
-    let datePosted = '';
+    let postDate = '';
     let sha = file.sha;
 
     try {
@@ -114,9 +114,9 @@
       const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, '')), c => c.charCodeAt(0));
       const raw = new TextDecoder().decode(bytes);
       const titleMatch = raw.match(/^title:\s*"?([^"\n]+)"?/m);
-      const dateMatch = raw.match(/^datePosted:\s*(.+)/m);
+      const dateMatch = raw.match(/^date:\s*(.+)/m);
       if (titleMatch) title = titleMatch[1].trim();
-      if (dateMatch) datePosted = dateMatch[1].trim();
+      if (dateMatch) postDate = dateMatch[1].trim();
     } catch (_) {}
 
     const card = document.createElement('div');
@@ -124,7 +124,7 @@
     card.innerHTML = `
       <div class="post-card-info">
         <span class="post-card-title">${escHtml(title)}</span>
-        <span class="post-card-date">${escHtml(datePosted)}</span>
+        <span class="post-card-date">${escHtml(postDate)}</span>
         <span class="post-card-file">${escHtml(file.name)}</span>
       </div>
       <div class="post-card-actions">

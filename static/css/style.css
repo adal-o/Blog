@@ -71,6 +71,18 @@
 
 
 
+.landing-html {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Full-screen link so the landing page is enterable by keyboard and crawlers */
+.landing-link {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+}
+
 .landing {
     background-size: cover;
     background-repeat: no-repeat;
@@ -148,10 +160,10 @@
 
 @media (max-width: 768px) {
     .draggable {
-        width: 22%;
+        width: 10%;
     }
     .draggable-sm {
-        width: 22%;
+        width: 16%;
     }
     .landing {
         background-size: 100% auto;
@@ -160,10 +172,10 @@
 
 @media (max-width: 480px) {
     .draggable {
-        width: 30%;
+        width: 13%;
     }
     .draggable-sm {
-        width: 28%;
+        width: 20%;
     }
 }
 
@@ -313,6 +325,11 @@ p.about-credit {
 }
 
 /* Subscribe modal */
+.subscribe-honeypot {
+    position: absolute;
+    left: -5000px;
+}
+
 .subscribe-nav-btn {
     background: none;
     border: none;

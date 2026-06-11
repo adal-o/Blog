@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    console.log("Mailchimp URL:", url);
     const script = document.createElement("script");
     script.src = url;
     document.head.appendChild(script);
@@ -58,8 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const imageCol = document.createElement("div");
     imageCol.className = "post-image-col";
 
+    // Markdown wraps images in <p>, so treat a paragraph that contains only
+    // an image as an image too.
+    const isImageNode = node =>
+      node.nodeName === "IMG" ||
+      (node.nodeName === "P" &&
+        node.children.length === 1 &&
+        node.children[0].nodeName === "IMG" &&
+        !node.textContent.trim());
+
     Array.from(postContent.childNodes).forEach(node => {
-      if (node.nodeName === "IMG") {
+      if (isImageNode(node)) {
         imageCol.appendChild(node);
       } else {
         textCol.appendChild(node);
@@ -123,6 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // Touch listeners must be registered non-passive for preventDefault to
+    // stop the page from scrolling while a sticker is being dragged.
     img.addEventListener("touchstart", e => {
       e.preventDefault();
       const touch = e.touches[0];
@@ -131,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
       offsetY = touch.clientY - img.offsetTop;
       highestZIndex++;
       img.style.zIndex = highestZIndex;
-    });
+    }, { passive: false });
 
     window.addEventListener("touchmove", e => {
       if (!isDragging) return;
@@ -139,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const touch = e.touches[0];
       img.style.left = touch.clientX - offsetX + "px";
       img.style.top = touch.clientY - offsetY + "px";
-    });
+    }, { passive: false });
 
     window.addEventListener("touchend", e => {
       if (isDragging) {

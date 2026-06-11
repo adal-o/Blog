@@ -104,7 +104,7 @@
 
     document.getElementById('postTitle').value = fmGet('title');
     document.getElementById('postAuthor').value = fmGet('author');
-    document.getElementById('postDate').value = fmGet('datePosted');
+    document.getElementById('postDate').value = fmGet('date');
 
     const featuredRaw = fmGet('featuredImage');
     if (featuredRaw) {
@@ -136,6 +136,15 @@
           .replace(/.*\/static\/images\//, '');
         const styles = styleM ? parseInlineStyle(styleM[1]) : { width: '100%', aspectRatio: 'auto' };
         elements.push({ id: nextId(), type: 'image', content: cleanSrc, imageData: '', styles });
+      } else if (trimmed.startsWith('</')) {
+        // Orphaned closing tag (e.g. </p> separated by a blank line) — skip
+      } else if (trimmed && !trimmed.startsWith('<')) {
+        // Plain text paragraph — occurs when a <p> block contains internal blank lines.
+        // Strip any orphaned closing tag (e.g. </p>) that ended up on the last line of the block.
+        const content = trimmed.replace(/\s*<\/[a-z]+>\s*$/i, '').trim();
+        if (content) {
+          elements.push({ id: nextId(), type: 'paragraph', content: unescHtml(content), imageData: '', styles: {} });
+        }
       }
     }
 
@@ -548,7 +557,7 @@
       }
     });
 
-    const markdown = `---\ntitle: "${escQuotes(title)}"\nauthor: "${escQuotes(author)}"\ndatePosted: ${date}\nfeaturedImage: "../static/images/${escQuotes(featured)}"\nlayout: "layouts/post.njk"\ntags: post\n---\n\n${content}`;
+    const markdown = `---\ntitle: "${escQuotes(title)}"\nauthor: "${escQuotes(author)}"\ndate: ${date}\nfeaturedImage: "/static/images/${escQuotes(featured)}"\nlayout: "layouts/post.njk"\ntags: post\n---\n\n${content}`;
 
     outputEl.textContent = markdown;
     outputEl.style.display = 'block';

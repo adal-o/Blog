@@ -1,37 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" style="height:100%;overflow:hidden;">
+<html lang="en" class="landing-html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ANGEL OUTSIDER</title>
+    <meta name="description" content="Angel Outsider is a blog and digital archive by Amelie Wu and Raine Torres — an ode to Los Angeles and everything it has given two girls from the Valley.">
     <link rel="icon" href="/AngelOutsider/static/images/logo.ico">
     <link rel="stylesheet" href="/AngelOutsider/static/css/style.css">
 </head>
 
-<body class='landing'>
+<body class="landing">
+    <a href="/AngelOutsider/home" class="landing-link" aria-label="Enter ANGEL OUTSIDER"></a>
+
+    <script>
+    // Pick a random background image for the landing page
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = [
+            "/AngelOutsider/static/images/1.jpg",
+            "/AngelOutsider/static/images/2.jpg",
+            "/AngelOutsider/static/images/3.jpg",
+            "/AngelOutsider/static/images/4.jpg",
+            "/AngelOutsider/static/images/5.jpg",
+            "/AngelOutsider/static/images/6.jpg",
+        ];
+
+        const randomIndex = Math.floor(Math.random() * images.length);
+        document.body.style.backgroundImage = `url('${images[randomIndex]}')`;
+    });
+    </script>
 </body>
-
-<script>
-// script.js
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Define an array of image URLs
-    const images = [
-        "/AngelOutsider/static/images/1.jpg",
-        "/AngelOutsider/static/images/2.jpg",
-        "/AngelOutsider/static/images/3.jpg",
-        "/AngelOutsider/static/images/4.jpg",
-        "/AngelOutsider/static/images/5.jpg",
-        "/AngelOutsider/static/images/6.jpg",
-    ];
-
-    const randomIndex = Math.floor(Math.random() * images.length);
-    const selectedImage = images[randomIndex];
-
-    document.body.style.backgroundImage = `url('${selectedImage}')`;
-
-});
-
-document.addEventListener('click', function(event) {
-    window.location.href = "/AngelOutsider/home";
-});
-
-</script>
+</html>
