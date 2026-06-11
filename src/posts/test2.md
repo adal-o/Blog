@@ -2,7 +2,7 @@
 title: "Test 2"
 author: "A"
 datePosted: 2026-04-24
-featuredImage: "../static/images/5.jpg"
+featuredImage: "/static/images/5.jpg"
 layout: "layouts/post.njk"
 tags: post
 ---

@@ -2,7 +2,7 @@
 title: "At the Ball Game"
 author: "Amelie Wu"
 datePosted: 2026-06-06
-featuredImage: "../static/images/Foam Finger.png"
+featuredImage: "/static/images/Foam Finger.png"
 layout: "layouts/post.njk"
 tags: post
 ---
