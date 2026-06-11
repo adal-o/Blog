@@ -1,18 +1,5 @@
-/* General Styles */
-:root {
-  --primary-color: #F2928E;
-  --secondary-color: #563838;
-  --accent-color: #AFC583;
-  --background-color: #fcf8e7;
-  --text-bg: rgba(255, 255, 255, 0.95);
-  --font-family: 'Helvetica', 'Arial', sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Post page styles. Loaded after style.css, which provides the shared
+   tokens (:root), reset, nav, and subscribe modal styles. */
 
 body {
     font-family: var(--font-family);
@@ -22,77 +9,6 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-}
-
-.blog-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 60px 40px;
-}
-
-.blog-header {
-  position: relative;
-  margin-bottom: 80px;
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-footer {
-    min-height: 15%;
-    color: var(--secondary-color); 
-    padding: 1em; 
-    text-align: right; 
-    font-weight: bold;
-    font-family: var(--font-family);
-    font-size: 1.5em;
-    position: relative;
-    right: 1em;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--pink);
-  font-style: italic;
-  letter-spacing: 1px;
-}
-
-.posts-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 60px;
-  margin-top: 40px;
-}
-
-.post-card {
-  text-align: center;
-}
-
-.post-card a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.post-image {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  margin: 0 auto 20px;
-}
-
-.post-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.post-title {
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: var(--secondary-color);
-  font-style: italic;
-  margin-top: 15px;
 }
 
 .back-button {
@@ -122,7 +38,7 @@ footer {
 
 .post-header {
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 1.25rem;
   margin-top: 100px;
 }
 
@@ -136,14 +52,14 @@ footer {
 }
 
 .post-meta {
-  margin-bottom: 40px;
+  margin-bottom: 1.25rem;
   padding-left: 0;
 }
 
 .post-date {
   font-size: 0.85rem;
   color: var(--secondary-color);
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 
 .post-author {
@@ -169,7 +85,7 @@ footer {
 .post-content h1,
 .post-content h2,
 .post-content h3 {
-  margin-bottom: 24px;
+  margin-bottom: 1.25rem;
   font-size: 1rem;
   line-height: 1.8;
   color: var(--secondary-color);
@@ -191,19 +107,12 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .blog-container,
   .post-container {
     padding: 40px 20px;
   }
 
-  .page-title,
   .post-heading {
     font-size: 2rem;
-  }
-
-  .posts-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
   }
 
   .post-meta,

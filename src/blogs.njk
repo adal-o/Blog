@@ -5,11 +5,11 @@ title: Recent Posts
 ---
 
 <div class="posts-grid">
-  {% for post in collections.post | reverse %}
+  {% for post in collections.posts | reverse %}
   <article class="post-card">
     <a href="{{ site.baseUrl }}{{ post.url | removeLeadingSlash }}">
       <div class="post-image">
-        <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}">
+        <img src="{{ site.baseUrl }}{{ post.data.featuredImage | removeLeadingSlash }}" alt="" loading="lazy">
       </div>
       <h2 class="post-title">{{ post.data.title }}</h2>
     </a>

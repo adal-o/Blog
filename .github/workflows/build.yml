@@ -9,19 +9,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Use Node.js current
-        uses: actions/setup-node@v3
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
         with:
-          node-version: current
+          node-version: 22
+          cache: npm
 
       - name: Install dependencies & build
         run: |
           npm ci
           npm run build
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3.8.0
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           #publish_dir is the folder on the docker instance which eleventy builds the pages to.
