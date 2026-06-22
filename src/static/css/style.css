@@ -22,7 +22,8 @@
     align-items: center;
 }
 
-.body-blog {
+.body-blog,
+.body-article {
     display: flex;
     font-family: var(--font-family);
     background-color: var(--background-color);
@@ -48,6 +49,16 @@
     scrollbar-color: var(--accent-color) var(--background-color);
 }
 
+/* Blog list + articles scroll the document itself, not this inner box.
+   iOS Safari only gives smooth momentum scrolling to the root scroller,
+   so scrolling an inner 100vh/overflow box causes flick-scroll stutter. */
+.body-blog .main-content,
+.body-article .main-content {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: visible;
+}
+
 .main-text {
     font-weight: bold;
     font-size: 3em;
@@ -67,6 +78,28 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.contact-line {
+    margin: 0.6em 0;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+.contact-icon {
+    width: 1.2em;
+    height: 1.2em;
+    flex-shrink: 0;
 }
 
 
