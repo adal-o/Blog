@@ -39,7 +39,6 @@ body {
 .post-header {
   position: relative;
   margin-bottom: 1.25rem;
-  margin-top: 100px;
 }
 
 .post-heading {
@@ -71,6 +70,7 @@ body {
   display: flex;
   gap: 3rem;
   align-items: start;
+  margin-top: 200px;
 }
 
 .post-text-col {
@@ -96,6 +96,15 @@ body {
 .post-content h3 {
   font-weight: 600;
   margin-bottom: 12px;
+}
+
+.post-content .post-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: normal;
+  margin-bottom: 1.25rem;
 }
 
 .post-content img {
@@ -129,12 +138,15 @@ body {
     margin: 0 0 24px;
   }
 
+  .post-content {
+    margin-top: 130px;
+  }
+
   .post-header {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    margin-top: 130px;
   }
 
   .back-button {
@@ -153,7 +165,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .post-header {
+  .post-content {
     margin-top: 110px;
   }
 }

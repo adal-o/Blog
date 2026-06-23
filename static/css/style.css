@@ -293,6 +293,7 @@
     flex-direction: column;
     gap: 2rem;
     padding-top: 1rem;
+    padding-left: 3rem;
 }
 
 .about-image:nth-child(1) { margin-left: 0; }
