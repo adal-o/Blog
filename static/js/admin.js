@@ -14,6 +14,10 @@
   const postsLoading = document.getElementById('postsLoading');
   const postsList = document.getElementById('postsList');
   const postsError = document.getElementById('postsError');
+  const archivedSection = document.getElementById('archivedSection');
+  const archivedList = document.getElementById('archivedList');
+  const archivedToggle = document.getElementById('archivedToggle');
+  const archivedToggleIcon = document.getElementById('archivedToggleIcon');
 
   function getPat() { return localStorage.getItem('gh_pat') || ''; }
   function savePat(pat) { localStorage.setItem('gh_pat', pat); }
@@ -71,9 +75,21 @@
     window.location.href = `${BASE_URL}admin/tool/`;
   });
 
+  let archivedOpen = false;
+  archivedToggle.addEventListener('click', () => {
+    archivedOpen = !archivedOpen;
+    archivedList.style.display = archivedOpen ? 'flex' : 'none';
+    archivedToggleIcon.textContent = archivedOpen ? '▼' : '▶';
+  });
+
   async function loadPosts() {
     postsLoading.style.display = 'block';
     postsList.innerHTML = '';
+    archivedList.innerHTML = '';
+    archivedSection.style.display = 'none';
+    archivedOpen = false;
+    archivedList.style.display = 'none';
+    archivedToggleIcon.textContent = '▶';
     postsError.style.display = 'none';
 
     try {
@@ -93,8 +109,29 @@
         return;
       }
 
-      const cards = await Promise.all(mdFiles.map(f => buildPostCard(f)));
-      cards.forEach(card => postsList.appendChild(card));
+      const results = await Promise.all(mdFiles.map(f => buildPostCard(f)));
+
+      let hasActive = false;
+      let hasArchived = false;
+
+      results.forEach(({ card, isArchived }) => {
+        if (isArchived) {
+          archivedList.appendChild(card);
+          hasArchived = true;
+        } else {
+          postsList.appendChild(card);
+          hasActive = true;
+        }
+      });
+
+      if (!hasActive) {
+        postsList.innerHTML = '<p class="empty-msg">No active posts.</p>';
+      }
+
+      if (hasArchived) {
+        archivedSection.style.display = 'block';
+      }
+
     } catch (err) {
       postsLoading.style.display = 'none';
       postsError.style.display = 'block';
@@ -106,6 +143,7 @@
     let title = file.name.replace(/\.md$/, '');
     let postDate = '';
     let sha = file.sha;
+    let isArchived = false;
 
     try {
       const res = await fetch(file.url, { headers: ghHeaders() });
@@ -115,12 +153,14 @@
       const raw = new TextDecoder().decode(bytes);
       const titleMatch = raw.match(/^title:\s*"?([^"\n]+)"?/m);
       const dateMatch = raw.match(/^date:\s*(.+)/m);
+      const archivedMatch = raw.match(/^archived:\s*true/im);
       if (titleMatch) title = titleMatch[1].trim();
       if (dateMatch) postDate = dateMatch[1].trim();
+      isArchived = !!archivedMatch;
     } catch (_) {}
 
     const card = document.createElement('div');
-    card.className = 'post-card-admin';
+    card.className = 'post-card-admin' + (isArchived ? ' archived' : '');
     card.innerHTML = `
       <div class="post-card-info">
         <span class="post-card-title">${escHtml(title)}</span>
@@ -128,13 +168,25 @@
         <span class="post-card-file">${escHtml(file.name)}</span>
       </div>
       <div class="post-card-actions">
-        <button class="btn-edit">Edit</button>
+        ${!isArchived ? `<button class="btn-edit">Edit</button>` : ''}
+        <button class="${isArchived ? 'btn-unarchive' : 'btn-archive'}">${isArchived ? 'Unarchive' : 'Archive'}</button>
         <button class="btn-delete">Delete</button>
       </div>
     `;
 
-    card.querySelector('.btn-edit').addEventListener('click', () => {
-      window.location.href = `${BASE_URL}admin/tool/?file=${encodeURIComponent(file.name)}`;
+    if (!isArchived) {
+      card.querySelector('.btn-edit').addEventListener('click', () => {
+        window.location.href = `${BASE_URL}admin/tool/?file=${encodeURIComponent(file.name)}`;
+      });
+    }
+
+    const toggleBtn = card.querySelector(isArchived ? '.btn-unarchive' : '.btn-archive');
+    toggleBtn.addEventListener('click', async () => {
+      if (isArchived) {
+        await unarchivePost(file.name, card);
+      } else {
+        await archivePost(file.name, card);
+      }
     });
 
     card.querySelector('.btn-delete').addEventListener('click', async () => {
@@ -142,7 +194,47 @@
       await deletePost(file.name, sha, card);
     });
 
-    return card;
+    return { card, isArchived };
+  }
+
+  async function archivePost(filename, card) {
+    const btn = card.querySelector('.btn-archive');
+    if (btn) { btn.disabled = true; btn.textContent = 'Archiving…'; }
+    try {
+      const res = await fetch(`${API_BASE}/repos/${REPO}/contents/${POSTS_PATH}/${filename}`, {
+        headers: ghHeaders(),
+      });
+      if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+      const data = await res.json();
+      const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+      const raw = new TextDecoder().decode(bytes);
+      const updated = setFrontmatterField(raw, 'archived', 'true');
+      await commitFileUpdate(filename, updated, data.sha, `Archive post: ${filename}`);
+      loadPosts();
+    } catch (err) {
+      alert(`Failed to archive: ${err.message}`);
+      if (btn) { btn.disabled = false; btn.textContent = 'Archive'; }
+    }
+  }
+
+  async function unarchivePost(filename, card) {
+    const btn = card.querySelector('.btn-unarchive');
+    if (btn) { btn.disabled = true; btn.textContent = 'Unarchiving…'; }
+    try {
+      const res = await fetch(`${API_BASE}/repos/${REPO}/contents/${POSTS_PATH}/${filename}`, {
+        headers: ghHeaders(),
+      });
+      if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+      const data = await res.json();
+      const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+      const raw = new TextDecoder().decode(bytes);
+      const updated = removeFrontmatterField(raw, 'archived');
+      await commitFileUpdate(filename, updated, data.sha, `Unarchive post: ${filename}`);
+      loadPosts();
+    } catch (err) {
+      alert(`Failed to unarchive: ${err.message}`);
+      if (btn) { btn.disabled = false; btn.textContent = 'Unarchive'; }
+    }
   }
 
   async function deletePost(filename, sha, cardEl) {
@@ -158,11 +250,49 @@
       }
       cardEl.remove();
       if (!postsList.querySelector('.post-card-admin')) {
-        postsList.innerHTML = '<p class="empty-msg">No posts yet. Create your first one!</p>';
+        postsList.innerHTML = '<p class="empty-msg">No active posts.</p>';
+      }
+      if (!archivedList.querySelector('.post-card-admin')) {
+        archivedSection.style.display = 'none';
       }
     } catch (err) {
       alert(`Failed to delete: ${err.message}`);
     }
+  }
+
+  async function commitFileUpdate(filename, content, sha, message) {
+    const bytes = new TextEncoder().encode(content);
+    const encoded = btoa(String.fromCharCode(...bytes));
+    const res = await fetch(
+      `${API_BASE}/repos/${REPO}/contents/${POSTS_PATH}/${filename}`,
+      {
+        method: 'PUT',
+        headers: ghHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ message, content: encoded, branch: BRANCH, sha }),
+      }
+    );
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.message || `HTTP ${res.status}`);
+    }
+    return res.json();
+  }
+
+  function setFrontmatterField(raw, key, value) {
+    return raw.replace(/^---\n([\s\S]*?)\n---/, (_, fm) => {
+      const lineRegex = new RegExp(`^${key}:.*$`, 'm');
+      const newFm = lineRegex.test(fm)
+        ? fm.replace(lineRegex, `${key}: ${value}`)
+        : fm + `\n${key}: ${value}`;
+      return `---\n${newFm}\n---`;
+    });
+  }
+
+  function removeFrontmatterField(raw, key) {
+    return raw.replace(/^---\n([\s\S]*?)\n---/, (_, fm) => {
+      const newFm = fm.replace(new RegExp(`^${key}:.*(\n|$)`, 'm'), '');
+      return `---\n${newFm}\n---`;
+    });
   }
 
   function escHtml(str) {
