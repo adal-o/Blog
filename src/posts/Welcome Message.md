@@ -2,7 +2,7 @@
 title: "Welcome to Angel Outsider"
 author: "Amelie Wu & Raine Torres"
 date: 2026-06-23
-featuredImage: "/static/images/default.png"
+featuredImage: "/static/images/IMG_4709.JPG"
 layout: "layouts/post.njk"
 tags: post
 ---
