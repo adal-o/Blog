@@ -19,3 +19,5 @@ tags: post
 
 <p>Subscribe to stay updated on what's to come and visit our about page to learn more!</p>
 
+<img src="{{ site.baseUrl }}static/images/bell434-072 Medium.jpeg" style="width: 100%; aspect-ratio: auto">
+
