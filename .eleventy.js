@@ -4,7 +4,7 @@ module.exports = function(eleventyConfig) {
 
   // Create a collection for blog posts (sorted oldest-first by `date`)
   eleventyConfig.addCollection("posts", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/posts/*.md");
+    return collectionApi.getFilteredByGlob("src/posts/*.md").filter(post => !post.data.archived);
   });
 
   eleventyConfig.addFilter("removeLeadingSlash", function(url) {

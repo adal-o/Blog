@@ -207,6 +207,61 @@ body {
 }
 .btn-ghost:hover { color: var(--text); border-color: #ccc; }
 
+/* Archive / Unarchive buttons */
+.btn-archive {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+.btn-archive:hover { background: #f0ece2; color: var(--text); border-color: #ccc; }
+
+.btn-unarchive {
+  background: transparent;
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+.btn-unarchive:hover { background: var(--secondary); color: #fff; }
+
+/* Archived cards */
+.post-card-admin.archived {
+  opacity: 0.55;
+  background: #f5f2ea;
+}
+
+/* Archived section */
+.archived-section { margin-top: 32px; }
+
+.archived-toggle {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-family: var(--font);
+  padding: 0 0 12px;
+}
+.archived-toggle:hover { color: var(--text); }
+
+.archived-toggle-icon { font-size: 0.6rem; }
+
+.archived-list { flex-direction: column; }
+
 /* Messages */
 .loading-msg { font-size: 0.88rem; color: var(--text-muted); padding: 16px 0; }
 .error-msg { font-size: 0.88rem; color: var(--danger); padding: 12px; background: #fff0f0; border: 1px solid #f8d0d0; }
