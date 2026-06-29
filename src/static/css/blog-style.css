@@ -91,6 +91,14 @@ body {
   color: var(--secondary-color);
 }
 
+/* Wrapping a whole section in one <p>…</p> with blank lines inside leaves a
+   stray </p>, which the browser turns into an empty paragraph. Collapse those
+   so they don't add large vertical gaps. */
+.post-content p:empty {
+  display: none;
+  margin: 0;
+}
+
 .post-content h1,
 .post-content h2,
 .post-content h3 {
@@ -129,17 +137,16 @@ body {
     padding-left: 0;
   }
 
+  /* No columns on mobile — render as a normal block so the document-order
+     content flows with collapsing margins (tight, even paragraph spacing). */
   .post-content {
-    flex-direction: column;
+    display: block;
+    margin-top: 130px;
   }
 
   .post-content img {
     width: 100%;
     margin: 0 0 24px;
-  }
-
-  .post-content {
-    margin-top: 130px;
   }
 
   .post-header {

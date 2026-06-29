@@ -3,6 +3,12 @@ on:
   push:
     branches:
       - main
+  # Rebuild daily so scheduled (future-dated) posts go live once their date
+  # arrives. 08:00 UTC ≈ start of the day in Los Angeles (1am PDT / midnight PST).
+  schedule:
+    - cron: "0 8 * * *"
+  # Allow a manual rebuild from the Actions tab.
+  workflow_dispatch:
 
 # Only let one deploy run at a time. If newer pushes arrive while a run is in
 # progress, cancel the older run so the latest commit is always deployed last.

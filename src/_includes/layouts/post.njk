@@ -12,8 +12,8 @@ ogType: article
       <h1 class="post-heading">{{ title }}</h1>
     </header>
     <div class="post-meta">
-      <p class="post-date">{{ datePosted | formatDate }}</p>
-      <p class="post-author">by {{ author }}</p>
+      
+      <p class="post-author"><i>{{ date | formatDate }}<br>By {{ author }}</i></p>
     </div>
     {{ content | safe }}
   </div>
