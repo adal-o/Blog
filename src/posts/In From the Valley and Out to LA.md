@@ -17,7 +17,7 @@ With this in mind, I offer a twofold introduction. </p>
 
 <h1>The Valley</h1>
 
-<img src="{{ site.baseUrl }}static/images/IMG_9320.jpeg" style="width: 100%; aspect-ratio: auto">
+<img src="{{ site.baseUrl }}static/images/IMG_9320.jpg" style="width: 100%; aspect-ratio: auto">
 
 <p>I describe myself as reserved, not shy. I am careful to make this distinction having actually been a once-shy person up until high school. As I began to consider identity and nurture a more conscious sense of self, I grew earnest to move past this label.
 
@@ -29,7 +29,7 @@ In this regard, the Valley has embraced me in its sanctuary throughout my childh
 
 <h1>The Broader Los Angeles</h1>
 
-<img src="{{ site.baseUrl }}static/images/IMG_3145.jpeg" style="width: 100%; aspect-ratio: auto">
+<img src="{{ site.baseUrl }}static/images/IMG_3145.jpg" style="width: 100%; aspect-ratio: auto">
 
 <p>A friend once told me that I am simultaneously a dreamer and a realist. I had never heard anything so accurate and her statement compelled me to assess its application. 
 
