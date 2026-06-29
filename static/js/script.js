@@ -52,11 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const postContent = document.querySelector(".post-content");
   if (postContent) {
-    const textCol = document.createElement("div");
-    textCol.className = "post-text-col";
-    const imageCol = document.createElement("div");
-    imageCol.className = "post-image-col";
-
     // Markdown wraps images in <p>, so treat a paragraph that contains only
     // an image as an image too.
     const isImageNode = node =>
@@ -66,16 +61,38 @@ document.addEventListener("DOMContentLoaded", () => {
         node.children[0].nodeName === "IMG" &&
         !node.textContent.trim());
 
-    Array.from(postContent.childNodes).forEach(node => {
-      if (isImageNode(node)) {
-        imageCol.appendChild(node);
-      } else {
-        textCol.appendChild(node);
-      }
-    });
+    // Snapshot the original document order so we can rebuild either layout.
+    const originalNodes = Array.from(postContent.childNodes);
 
-    postContent.appendChild(textCol);
-    postContent.appendChild(imageCol);
+    // Wide screens get a two-column layout (text on the left, images stacked
+    // on the right). On mobile we keep the post in document order so images
+    // appear inline between paragraphs instead of all collected at the bottom.
+    const wideScreen = window.matchMedia("(min-width: 769px)");
+
+    const applyLayout = () => {
+      const isSplit = !!postContent.querySelector(".post-text-col");
+
+      if (wideScreen.matches && !isSplit) {
+        const textCol = document.createElement("div");
+        textCol.className = "post-text-col";
+        const imageCol = document.createElement("div");
+        imageCol.className = "post-image-col";
+        originalNodes.forEach(node => {
+          (isImageNode(node) ? imageCol : textCol).appendChild(node);
+        });
+        postContent.appendChild(textCol);
+        postContent.appendChild(imageCol);
+      } else if (!wideScreen.matches && isSplit) {
+        // Move every node back into document order, then drop the now-empty
+        // column wrappers.
+        originalNodes.forEach(node => postContent.appendChild(node));
+        postContent.querySelector(".post-text-col")?.remove();
+        postContent.querySelector(".post-image-col")?.remove();
+      }
+    };
+
+    applyLayout();
+    wideScreen.addEventListener("change", applyLayout);
   }
 
   const draggables = document.querySelectorAll(".draggable");
