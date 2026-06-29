@@ -11,7 +11,7 @@ tags: post
 
 <h1>- Frank Lloyd Wright</h1>
 
-<img src="{{ site.baseUrl }}static/images/IMG_6129.heic" style="width: 100%; aspect-ratio: auto">
+<img src="{{ site.baseUrl }}static/images/IMG_6129.jpg" style="width: 100%; aspect-ratio: auto">
 
 <p>My name is Raine and I am a girl from the valley. For the past seven months, I have been living in Japan; in a town in Saitama on the outskirts of Tokyo. It seems I am always situated on the brink of a larger, more noteworthy location and perhaps that is the most defining thing about me.</p>
 
@@ -41,7 +41,7 @@ tags: post
 
 <p>I am a girl from the valley and this is my hello.</p>
 
-<img src="{{ site.baseUrl }}static/images/IMG_0293 2.HEIC" style="width: 100%; aspect-ratio: auto">
+<img src="{{ site.baseUrl }}static/images/IMG_0293 2.jpg" style="width: 100%; aspect-ratio: auto">
 
 <h1>The Parts of my Sum:</h1>
 
