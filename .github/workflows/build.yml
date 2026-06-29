@@ -4,6 +4,12 @@ on:
     branches:
       - main
 
+# Only let one deploy run at a time. If newer pushes arrive while a run is in
+# progress, cancel the older run so the latest commit is always deployed last.
+concurrency:
+  group: deploy-gh-pages
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
