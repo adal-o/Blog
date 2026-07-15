@@ -2,12 +2,12 @@
 title: "Heaven is a Park"
 author: "Raine K. Torres"
 date: 2026-07-15
-featuredImage: "/static/images/IMG_8840.HEIC"
+featuredImage: "/static/images/AO Park Day.PNG"
 layout: "layouts/post.njk"
 tags: post
 ---
 
-<img src="{{ site.baseUrl }}static/images/IMG_0292.HEIC" style="width: 100%; aspect-ratio: auto">
+<img src="{{ site.baseUrl }}static/images/IMG_0292-1.png" style="width: 100%; aspect-ratio: auto">
 
 <h1>“At some point in life, the world's beauty becomes enough." - Toni Morrison</h1>
 
@@ -37,7 +37,11 @@ tags: post
 
 <p>Perhaps heaven is a park.</p>
 
+<img src="{{ site.baseUrl }}static/images/IMG_8840.png" style="width: 100%; aspect-ratio: auto">
+
 <p>* Go see Several Eterneties in a Day: Form in the Age of Living Materials currently on display at the Hammer Museum. I cannot recommend it enough!</p>
+
+<img src="{{ site.baseUrl }}static/images/IMG_8919.png" style="width: 100%; aspect-ratio: auto">
 
 <img src="{{ site.baseUrl }}static/images/IMG_5460.JPG" style="width: 100%; aspect-ratio: auto">
 
