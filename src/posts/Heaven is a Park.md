@@ -33,6 +33,8 @@ tags: post
 
 <p>I am given all of this, and yet the park expects nothing of me in return.</p>
 
+<p>Open arms, grass, sunshine. Humanity, nature, life in abundance. </p>
+
 <p>In a park, I feel the world move around me and within me, and I find it impossible to believe that life is all that bad.</p>
 
 <p>Perhaps heaven is a park.</p>
