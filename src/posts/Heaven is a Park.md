@@ -7,12 +7,11 @@ layout: "layouts/post.njk"
 tags: post
 ---
 
-<img src="{{ site.baseUrl }}static/images/IMG_5460.JPG" style="width: 100%; aspect-ratio: auto">
+<img src="{{ site.baseUrl }}static/images/IMG_0292.HEIC" style="width: 100%; aspect-ratio: auto">
 
 <h1>“At some point in life, the world's beauty becomes enough." - Toni Morrison</h1>
 
-<p>There are times I imagine that heaven is a park.
-</p>
+<p>There are times I imagine that heaven is a park.</p>
 
 <p>It is on late afternoons, when I walk with my little dog as the sun begins its descent and the wind blows sweetly in the grass.</p>
 
@@ -28,7 +27,7 @@ tags: post
 
 <p>But even on my worst of days, I would still feel the shift. My breathing would settle, my heart would still, and whatever weight I carried would lighten, whatever emptiness within me would fill, even just slightly. In the bend of the tree branches, the dappled sunlight, and the people living and breathing, the park would outstretch its arms to me and tell me to take my fill and leave whatever ailed me.</p>
 
-<p>I have watched a million lifetimes take place in a park. Young parents taking their still cloudy-eyed baby for her first breath of fresh air, friends playing an increasingly heated game of pretend, fickle lovers intertwined on the grass, newfound runners in the midst of their quarter-life crisis, empty nesters taking their daily stroll, hand in hand. These tiny worlds all take place on the same sacred grounds of a park, bumping into each other gently, like bumble bees on a single flower. The soccer ball gets kicked out the field and into the lovers’ picnic, the runner marks their laps by the passing of the playground, the older couple makes their way slowly around it all. </p>
+<p>I have watched a million lifetimes take place in a park. Young parents taking their still cloudy-eyed baby for her first breath of fresh air, friends playing an increasingly heated game of pretend, fickle lovers intertwined on the grass, newfound runners in the midst of their quarter-life crisis, empty nesters taking their daily stroll, hand in hand. These tiny worlds all take place on the same sacred grounds of a park, bumping into each other gently, like bumble bees on a single flower. The soccer ball gets kicked out the field and into the lovers’ picnic, the runner marks their laps by the passing of the playground, the older couple makes their way slowly around it all.</p>
 
 <p>In the very same moment, the birds build their nests, the bugs get into little tiffs beneath the dirt, the flower buds poke their heads out of the grass, and the squirrels run away from all the dogs hellbent on their destruction. In every centimeter, in every moment, there is breath and there is life.</p>
 
@@ -36,7 +35,7 @@ tags: post
 
 <p>In a park, I feel the world move around me and within me, and I find it impossible to believe that life is all that bad.</p>
 
-<p>Perhaps heaven is a park. </p>
+<p>Perhaps heaven is a park.</p>
 
 <p>* Go see Several Eterneties in a Day: Form in the Age of Living Materials currently on display at the Hammer Museum. I cannot recommend it enough!</p>
 
