@@ -43,5 +43,3 @@ tags: post
 
 <img src="{{ site.baseUrl }}static/images/IMG_8840 2.png" style="width: 100%; aspect-ratio: auto">
 
-<img src="{{ site.baseUrl }}static/images/IMG_8919 2.png" style="width: 100%; aspect-ratio: auto">
-
