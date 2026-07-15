@@ -41,7 +41,7 @@ tags: post
 
 <img src="{{ site.baseUrl }}static/images/IMG_6164.jpeg" style="width: 100%; aspect-ratio: auto">
 
-<p>* Go see Several Eterneties in a Day: Form in the Age of Living Materials currently on display at the Hammer Museum. I cannot recommend it enough!</p>
+<h1>* Go see Several Eterneties in a Day: Form in the Age of Living Materials currently on display at the Hammer Museum. I cannot recommend it enough!</h1>
 
 <img src="{{ site.baseUrl }}static/images/IMG_8840 2.png" style="width: 100%; aspect-ratio: auto">
 
