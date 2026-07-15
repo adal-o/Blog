@@ -2,7 +2,7 @@
 title: "Heaven is a Park"
 author: "Raine K. Torres"
 date: 2026-07-15
-featuredImage: "/static/images/AO Park Day.PNG"
+featuredImage: "/static/images/AO Park Day BLANK.jpg"
 layout: "layouts/post.njk"
 tags: post
 ---
