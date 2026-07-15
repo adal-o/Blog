@@ -17,7 +17,7 @@ tags: post
 
 <p>Sometimes, at high noon, when I am laid beside a friend, our backs damp and our limbs outstretched upon an endless expanse of grass as we speak our joys and sorrows into the wind, asking that the park hold them for us.</p>
 
-<p>In sunshine, when the clouds are high and I’ve passed by six different birthday parties and three different soccer games and I wonder how much this park has carried: how many stroller wheels and scraped knees and first kisses and birthday candles and sneaker marks when in only a single day, there could be this many eternities.*</p>
+<p>It is in sunshine, when the clouds are high and I’ve passed by six different birthday parties and three different soccer games and I wonder how much this park has carried: how many stroller wheels and scraped knees and first kisses and birthday candles and sneaker marks when in only a single day, there could be this many eternities.*</p>
 
 <p>I can think of no place that has held me in both my joy and my sorrow better than a park has.</p>
 
@@ -29,7 +29,7 @@ tags: post
 
 <p>I have watched a million lifetimes take place in a park. Young parents taking their still cloudy-eyed baby for her first breath of fresh air, friends playing an increasingly heated game of pretend, fickle lovers intertwined on the grass, newfound runners in the midst of their quarter-life crisis, empty nesters taking their daily stroll, hand in hand. These tiny worlds all take place on the same sacred grounds of a park, bumping into each other gently, like bumble bees on a single flower. The soccer ball gets kicked out the field and into the lovers’ picnic, the runner marks their laps by the passing of the playground, the older couple makes their way slowly around it all.</p>
 
-<p>In the very same moment, the birds build their nests, the bugs get into little tiffs beneath the dirt, the flower buds poke their heads out of the grass, and the squirrels run away from all the dogs hellbent on their destruction. In every centimeter, in every moment, there is breath and there is life.</p>
+<p>In the very same moment, the birds build their nests, the bugs get into little tiffs beneath the dirt, the buds poke their heads out of the grass, and the squirrels run away from all the dogs hellbent on their destruction. In every centimeter, in every moment, there is breath and there is life.</p>
 
 <p>I am given all of this, and yet the park expects nothing of me in return.</p>
 
