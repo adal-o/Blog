@@ -2,7 +2,7 @@
 title: "Heaven is a Park"
 author: "Raine K. Torres"
 date: 2026-07-15
-featuredImage: "/static/images/IMG_5460.JPG"
+featuredImage: "/static/images/IMG_8840.HEIC"
 layout: "layouts/post.njk"
 tags: post
 ---
@@ -39,5 +39,5 @@ tags: post
 
 <p>* Go see Several Eterneties in a Day: Form in the Age of Living Materials currently on display at the Hammer Museum. I cannot recommend it enough!</p>
 
-<img src="{{ site.baseUrl }}static/images/IMG_8840.HEIC" style="width: 100%; aspect-ratio: auto">
+<img src="{{ site.baseUrl }}static/images/IMG_5460.JPG" style="width: 100%; aspect-ratio: auto">
 
