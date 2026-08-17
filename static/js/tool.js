@@ -120,22 +120,16 @@
 
       if (trimmed.startsWith('<p>')) {
         const content = trimmed.replace(/^<p>/, '').replace(/<\/p>$/, '').trim();
-        elements.push({ id: nextId(), type: 'paragraph', content: unescHtml(content), imageData: '', styles: {} });
+        elements.push({ id: nextId(), type: 'paragraph', content: unescHtml(content), imageData: '', styles: {}, caption: '' });
 
       } else if (trimmed.match(/^<h[1-3]>/)) {
         const content = trimmed.replace(/^<h[1-3]>/, '').replace(/<\/h[1-3]>$/, '').trim();
-        elements.push({ id: nextId(), type: 'header', content: unescHtml(content), imageData: '', styles: {} });
+        elements.push({ id: nextId(), type: 'header', content: unescHtml(content), imageData: '', styles: {}, caption: '' });
 
-      } else if (trimmed.startsWith('<img')) {
-        const srcM = trimmed.match(/src="([^"]+)"/);
-        const styleM = trimmed.match(/style="([^"]+)"/);
-        const src = srcM ? srcM[1] : '';
-        // Strip {{ site.baseUrl }}static/images/ or any path prefix
-        const cleanSrc = src
-          .replace(/\{\{[^}]+\}\}static\/images\//, '')
-          .replace(/.*\/static\/images\//, '');
-        const styles = styleM ? parseInlineStyle(styleM[1]) : { width: '100%', aspectRatio: 'auto' };
-        elements.push({ id: nextId(), type: 'image', content: cleanSrc, imageData: '', styles });
+      } else if (trimmed.startsWith('<figure') || trimmed.startsWith('<img')) {
+        // Captioned images are wrapped in <figure>…<figcaption>; uncaptioned
+        // ones are a bare <img>. Both carry the src/style on the <img>.
+        elements.push(parseImageBlock(trimmed));
       } else if (trimmed.startsWith('</')) {
         // Orphaned closing tag (e.g. </p> separated by a blank line) — skip
       } else if (trimmed && !trimmed.startsWith('<')) {
@@ -143,12 +137,26 @@
         // Strip any orphaned closing tag (e.g. </p>) that ended up on the last line of the block.
         const content = trimmed.replace(/\s*<\/[a-z]+>\s*$/i, '').trim();
         if (content) {
-          elements.push({ id: nextId(), type: 'paragraph', content: unescHtml(content), imageData: '', styles: {} });
+          elements.push({ id: nextId(), type: 'paragraph', content: unescHtml(content), imageData: '', styles: {}, caption: '' });
         }
       }
     }
 
     renderCanvas();
+  }
+
+  function parseImageBlock(block) {
+    const srcM = block.match(/src="([^"]+)"/);
+    const styleM = block.match(/style="([^"]+)"/);
+    const captionM = block.match(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/i);
+    const src = srcM ? srcM[1] : '';
+    // Strip {{ site.baseUrl }}static/images/ or any path prefix
+    const cleanSrc = src
+      .replace(/\{\{[^}]+\}\}static\/images\//, '')
+      .replace(/.*\/static\/images\//, '');
+    const styles = styleM ? parseInlineStyle(styleM[1]) : { width: '100%', aspectRatio: 'auto' };
+    const caption = captionM ? unescHtml(captionM[1].trim()) : '';
+    return { id: nextId(), type: 'image', content: cleanSrc, imageData: '', styles, caption };
   }
 
   function parseInlineStyle(styleStr) {
@@ -279,6 +287,7 @@
       type,
       content: '',
       imageData: '',
+      caption: '',
       styles: type === 'image' ? { width: '100%', aspectRatio: 'auto' } : {},
     });
     renderCanvas();
@@ -355,6 +364,14 @@
         pathInput.value = el.content || '';
         pathInput.addEventListener('input', (ev) => updateElement(el.id, ev.target.value, ''));
 
+        const captionInput = document.createElement('input');
+        captionInput.type = 'text';
+        captionInput.className = 'caption-input';
+        captionInput.placeholder = 'Caption (optional)';
+        captionInput.value = el.caption || '';
+        // Update in place — re-rendering here would steal focus mid-typing.
+        captionInput.addEventListener('input', (ev) => updateCaption(el.id, ev.target.value));
+
         if (el.imageData || el.content) {
           const preview = document.createElement('img');
           preview.src = el.imageData || (window.siteBaseUrl || '') + 'static/images/' + el.content;
@@ -362,10 +379,18 @@
           preview.className = 'image-preview';
           Object.assign(preview.style, el.styles);
           imageContainer.appendChild(preview);
+
+          if (el.caption) {
+            const captionPreview = document.createElement('div');
+            captionPreview.className = 'image-caption-preview';
+            captionPreview.textContent = el.caption;
+            imageContainer.appendChild(captionPreview);
+          }
         }
 
         imageContainer.appendChild(fileInput);
         imageContainer.appendChild(pathInput);
+        imageContainer.appendChild(captionInput);
         inputEl = imageContainer;
       }
 
@@ -411,6 +436,11 @@
     elements[idx].content = value;
     if (imageData !== '') elements[idx].imageData = imageData;
     if (imageData) renderCanvas();
+  }
+
+  function updateCaption(id, value) {
+    const idx = elements.findIndex(e => e.id === id);
+    if (idx >= 0) elements[idx].caption = value;
   }
 
   function removeElement(id) {
@@ -553,7 +583,12 @@
         content += `<h1>${escHtml(el.content)}</h1>\n\n`;
       } else if (el.type === 'image' && el.content.trim()) {
         const styleAttr = stylesToInline(el.styles);
-        content += `<img src="{{ site.baseUrl }}static/images/${el.content}" style="${styleAttr}">\n\n`;
+        const img = `<img src="{{ site.baseUrl }}static/images/${el.content}" style="${styleAttr}">`;
+        const caption = (el.caption || '').trim();
+        // No blank lines inside the <figure> — the loader splits blocks on them.
+        content += caption
+          ? `<figure class="post-figure">\n  ${img}\n  <figcaption class="image-caption">${escHtml(caption)}</figcaption>\n</figure>\n\n`
+          : `${img}\n\n`;
       }
     });
 
@@ -656,7 +691,20 @@
         img.src = el.imageData || (window.siteBaseUrl || '') + 'static/images/' + el.content;
         img.alt = '';
         Object.assign(img.style, el.styles);
-        imageCol.appendChild(img);
+
+        const caption = (el.caption || '').trim();
+        if (caption) {
+          const figure = document.createElement('figure');
+          figure.className = 'post-figure';
+          const figcaption = document.createElement('figcaption');
+          figcaption.className = 'image-caption';
+          figcaption.textContent = caption;
+          figure.appendChild(img);
+          figure.appendChild(figcaption);
+          imageCol.appendChild(figure);
+        } else {
+          imageCol.appendChild(img);
+        }
       }
     });
 

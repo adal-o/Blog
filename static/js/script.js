@@ -53,9 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const postContent = document.querySelector(".post-content");
   if (postContent) {
     // Markdown wraps images in <p>, so treat a paragraph that contains only
-    // an image as an image too.
+    // an image as an image too. Captioned images arrive as a <figure> holding
+    // the <img> plus its <figcaption>, which belongs in the image column whole.
     const isImageNode = node =>
       node.nodeName === "IMG" ||
+      (node.nodeName === "FIGURE" && !!node.querySelector("img")) ||
       (node.nodeName === "P" &&
         node.children.length === 1 &&
         node.children[0].nodeName === "IMG" &&

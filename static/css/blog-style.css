@@ -122,6 +122,24 @@ body {
   margin-bottom: 24px;
 }
 
+/* Captioned images: the <figure> carries the spacing so the caption sits
+   directly beneath the image. */
+.post-content figure {
+  margin: 0 0 24px;
+}
+
+.post-content figure img {
+  margin-bottom: 0;
+}
+
+.post-content figcaption {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--primary-color);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .post-container {
@@ -147,6 +165,10 @@ body {
   .post-content img {
     width: 100%;
     margin: 0 0 24px;
+  }
+
+  .post-content figure img {
+    margin-bottom: 0;
   }
 
   .post-header {
