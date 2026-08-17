@@ -5,7 +5,7 @@ date: 2026-06-23
 featuredImage: "/static/images/images.jpg"
 layout: "layouts/post.njk"
 tags: post
-archived: true
+
 ---
 
 <h1>Test</h1>
