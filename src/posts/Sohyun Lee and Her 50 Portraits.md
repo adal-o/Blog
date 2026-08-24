@@ -7,7 +7,10 @@ layout: "layouts/post.njk"
 tags: post
 ---
 
-<img src="{{ site.baseUrl }}static/images/AMELIE-46.jpg" style="width: 100%; aspect-ratio: auto">
+<figure class="post-figure">
+  <img src="{{ site.baseUrl }}static/images/AMELIE-46.jpg" style="width: 100%; aspect-ratio: auto">
+  <figcaption class="image-caption">In Atwater Village - Sohyun and I's bags on the right.</figcaption>
+</figure>
 
 <p>My first resonant impression of Sohyun Lee was when she deftly snapped a photo of me eating a breakfast sandwich outside of Proof Bakery. The granular feeling of English muffin crumbs lingered on my face even after I swiped them away in vain. In this capture that would’ve otherwise felt sudden for two people having just met for the first time, I felt an immediate sense of warmth and familiarity rather than awkward intrusion. 
 
